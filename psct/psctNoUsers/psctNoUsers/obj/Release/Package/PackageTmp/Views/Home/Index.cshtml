@@ -39,60 +39,35 @@
         </p>
 
         <div class="row">
-            <div class="col-4 col-12-mobile">
-                <article class="item">
-                    <a href="#" class="image fit">
-                        <img src="images/pic02.jpg" alt=""/>
-                    </a>
-                    <header>
-                        <h3>Ipsum Feugiat</h3>
-                    </header>
-                </article>
-                <article class="item">
-                    <a href="#" class="image fit">
-                        <img src="images/pic03.jpg" alt=""/>
-                    </a>
-                    <header>
-                        <h3>Rhoncus Semper</h3>
-                    </header>
-                </article>
-            </div>
-            <div class="col-4 col-12-mobile">
-                <article class="item">
-                    <a href="#" class="image fit">
-                        <img src="images/pic04.jpg" alt=""/>
-                    </a>
-                    <header>
-                        <h3>Magna Nullam</h3>
-                    </header>
-                </article>
-                <article class="item">
-                    <a href="#" class="image fit">
-                        <img src="images/pic05.jpg" alt=""/>
-                    </a>
-                    <header>
-                        <h3>Natoque Vitae</h3>
-                    </header>
-                </article>
-            </div>
-            <div class="col-4 col-12-mobile">
-                <article class="item">
-                    <a href="#" class="image fit">
-                        <img src="images/pic06.jpg" alt=""/>
-                    </a>
-                    <header>
-                        <h3>Dolor Penatibus</h3>
-                    </header>
-                </article>
-                <article class="item">
-                    <a href="#" class="image fit">
-                        <img src="images/pic07.jpg" alt=""/>
-                    </a>
-                    <header>
-                        <h3>Orci Convallis</h3>
-                    </header>
-                </article>
-            </div>
+
+            @* loop over ViewBag.imgGroups *@
+            @foreach ( var imgGroup in ViewBag.imgGroups )
+            {
+                <div class="col-4 col-12-mobile">
+                    @foreach ( string img in imgGroup )
+                    {
+                        if ( img.EndsWith( ".mp4" ) || img.EndsWith( ".MP4" ) )
+                        {
+                            <article class="item">
+                                <a href="#" class="image fit">
+                                    <video width="320" height="240" controls>
+                                        <source src="~/Content/resources/@img" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </a>
+                            </article>
+                        }
+                        else
+                        {
+                            <article class="item">
+                                <a href="#" class="image fit">
+                                    <img src="~/Content/resources/@img" alt=""/>
+                                </a>
+                            </article>
+                        }
+                    }
+                </div>
+            }
         </div>
 
     </div>
@@ -125,19 +100,16 @@
 <!-- Contact -->
 <section id="contact" class="four">
     <div class="container">
-
         <header>
             <h2>Contact</h2>
         </header>
+        <p><i class="bi bi-telephone"></i>+27 76 794 9320</p>
+        <p><i class="bi bi-geo-alt"></i>16 Busschau Rd, Fairleads, Benoni, 1512</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2919.676579123499!2d28.35421549668803!3d-26.116796811525795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e953fd18b2e37cd%3A0x508d28a5ba9b6407!2sProjected%20SHE%20Consultants%20and%20Training!5e0!3m2!1sen!2sza!4v1684476053303!5m2!1sen!2sza"
+                height="450" style="border:0; width:100%; " allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
 
-        <p>
-            Elementum sem parturient nulla quam placerat viverra
-            mauris non cum elit tempus ullamcorper dolor. Libero rutrum ut lacinia
-            donec curae mus. Eleifend id porttitor ac ultricies lobortis sem nunc
-            orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.
-        </p>
-
-        <form method="post" action="#">
+        <form action="mailto:info@psct.co.za" method="post" action="#">
             <div class="row">
                 <div class="col-6 col-12-mobile">
                     <input type="text" name="name" placeholder="Name"/>
@@ -153,6 +125,5 @@
                 </div>
             </div>
         </form>
-
     </div>
 </section>

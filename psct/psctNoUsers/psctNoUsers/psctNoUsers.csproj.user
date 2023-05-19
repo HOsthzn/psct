@@ -10,7 +10,7 @@
     <UseGlobalApplicationHostFile />
     <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
     <ProjectView>ProjectFiles</ProjectView>
-    <NameOfLastUsedPublishProfile>D:\source\repos\psct\psctNoUsers\psctNoUsers\Properties\PublishProfiles\Release.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>D:\source\repos\psct\psctNoUsers\psctNoUsers\Properties\PublishProfiles\Debug.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

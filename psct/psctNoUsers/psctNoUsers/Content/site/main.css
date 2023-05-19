@@ -1,4 +1,4 @@
-@import url("fontawesome-all.min.css");
+/*@import url("fontawesome-all.min.css");*/
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,600");
 
 /*
@@ -2491,7 +2491,7 @@ input, select, textarea {
 
 					#headerToggle .toggle:before {
 						text-decoration: none;
-						content: '\f0c9';
+						content: '\F479';
 						color: #fff;
 						font-size: 18px;
 						background: rgba(128, 136, 144, 0.5);
