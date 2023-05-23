@@ -117,21 +117,24 @@
                 height="450" style="border:0; width:100%; " allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
 
-        <form action="mailto:info@psct.co.za" method="post">
+        @using ( Html.BeginForm( "ContactForm", "Home", FormMethod.Post ) )
+        {
             <div class="row">
                 <div class="col-6 col-12-mobile">
-                    <input type="text" name="name" placeholder="Name" />
+                    @Html.TextBox( "name", null, new { placeholder = "Name" } )
                 </div>
                 <div class="col-6 col-12-mobile">
-                    <input type="text" name="email" placeholder="Email" />
+                    @Html.TextBox( "email", null, new { type = "email", placeholder = "Email" } )
                 </div>
                 <div class="col-12">
-                    <textarea name="message" placeholder="Message"></textarea>
+                    @Html.TextArea( "message", null, new { placeholder = "Message" } )
                 </div>
                 <div class="col-12">
-                    <input type="submit" value="Send Message" />
+                    <button type="submit">Send Message</button>
                 </div>
             </div>
-        </form>
+        }
+
     </div>
+
 </section>
