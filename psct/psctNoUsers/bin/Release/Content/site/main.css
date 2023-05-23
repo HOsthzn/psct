@@ -1751,18 +1751,18 @@ section, article {
 
     .image img {
         display: block;
-        width: 100%;
+        width: 70%;
     }
 
     .image.avatar48 {
-        width: 48px;
+       /* width: 48px;
         height: 48px;
-        background: #f00;
+        background: #f00;*/
     }
 
         .image.avatar48 img {
-            width: 48px;
-            height: 48px;
+            /*width: 48px;
+            height: 48px;*/
         }
 
     .image.fit {
@@ -2046,7 +2046,7 @@ button,
     -webkit-justify-content: space-between;
     -ms-justify-content: space-between;
     justify-content: space-between;
-    background: #AAA7A3 url("images/overlay.png");
+    background: #888480 url("images/overlay.png");
     box-shadow: inset -0.25em 0 0.25em 0 rgba(0, 0, 0, 0.1);
     color: #fff;
     height: 100%;
@@ -2119,9 +2119,11 @@ button,
     }
 
     #logo .image {
-        position: absolute;
+        /*position: absolute;
         left: 0;
-        top: 0;
+        top: 0;*/
+        display: flex;
+        justify-content: center;
     }
 
 #nav ul {
@@ -2222,7 +2224,7 @@ button,
             color: rgba(255, 255, 255, 0.75);
         }
 
-            #main > section.dark h2, #main > section.dark h3, #main > section.dark h4, #main > section.dark h5, #main > section.dark h6 {
+            #main > section.dark h1,#main > section.dark h2, #main > section.dark h3, #main > section.dark h4, #main > section.dark h5, #main > section.dark h6 {
                 color: inherit;
             }
 
@@ -2247,7 +2249,7 @@ button,
         }
 
         #main > section.one {
-            background-color: #2C96C3;
+            background-color: #16A4C8;
             background-image: url("../../images/banner.jpg");
         }
 
@@ -2256,8 +2258,7 @@ button,
         }
 
         #main > section.three {
-            background-color: #309CC6;
-            color: #fff;
+            background-color: #16A4C8;            
         }
 
         #main > section.four {
