@@ -1,4 +1,4 @@
-@import url("fontawesome-all.min.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,600");
 
 /*
@@ -127,6 +127,14 @@ h1, h2, h3, h4, h5, h6 {
             color: #333;
         }
 
+h1 {
+    font-size: 2.3em
+}
+
+    h1.alt {
+        color: #666;
+    }
+
 h2 {
     font-size: 2em;
     letter-spacing: -1px;
@@ -177,7 +185,7 @@ a {
 }
 
     a:hover {
-        color: #E27689;
+        color: #fff;
         border-bottom-color: rgba(255, 255, 255, 0);
     }
 
@@ -2003,7 +2011,7 @@ button,
         text-rendering: auto;
         line-height: 1;
         text-transform: none !important;
-        font-family: 'Font Awesome 5 Free';
+        font-family: 'Bootstrap-icons';
         font-weight: 400;
     }
 
@@ -2020,7 +2028,7 @@ button,
     }
 
     .icon.brands:before {
-        font-family: 'Font Awesome 5 Brands';
+        font-family: 'Bootstrap-icons';
     }
 
 /* Header */
@@ -2492,13 +2500,13 @@ button,
                 text-rendering: auto;
                 line-height: 1;
                 text-transform: none !important;
-                font-family: 'Font Awesome 5 Free';
+                font-family: 'Bootstrap-icons';
                 font-weight: 900;
             }
 
             #headerToggle .toggle:before {
                 text-decoration: none;
-                content: '\f0c9';
+                content: '\F479';
                 color: #fff;
                 font-size: 18px;
                 background: rgba(128, 136, 144, 0.5);
