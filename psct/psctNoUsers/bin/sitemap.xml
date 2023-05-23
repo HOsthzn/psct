@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://www.psct.co.za/</loc>
+        <xhtml:link rel="canonical" href="https://www.psct.co.za/" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.psct.co.za/" />
+        <lastmod>2023-05-23</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://www.psct.co.za/#portfolio</loc>
+        <xhtml:link rel="canonical" href="https://www.psct.co.za/#portfolio" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.psct.co.za/#portfolio" />
+        <lastmod>2023-05-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.psct.co.za/#about</loc>
+        <xhtml:link rel="canonical" href="https://www.psct.co.za/#about" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.psct.co.za/#about" />
+        <lastmod>2023-05-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.psct.co.za/#WhyUs</loc>
+        <xhtml:link rel="canonical" href="https://www.psct.co.za/#WhyUs" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.psct.co.za/#WhyUs" />
+        <lastmod>2023-05-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.psct.co.za/#contact</loc>
+        <xhtml:link rel="canonical" href="https://www.psct.co.za/#contact" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.psct.co.za/#contact" />
+        <lastmod>2023-05-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+</urlset>
