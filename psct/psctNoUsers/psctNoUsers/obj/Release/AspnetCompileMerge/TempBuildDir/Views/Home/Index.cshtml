@@ -6,19 +6,13 @@
     <div class="container">
 
         <header>
-            <h2 class="alt">
-                Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br/>
-                site template designed by <a href="http://html5up.net">HTML5 UP</a>.
-            </h2>
+            <h1 class="alt">
+                Industry-Leading Safety and Occupational Health Training
+            </h1>
             <p>
-                Ligula scelerisque justo sem accumsan diam quis<br/>
-                vitae natoque dictum sollicitudin elementum.
+                Discover exceptional training solutions provided by Projected SHE Consultants and Training. Our dedicated team of subject matter facilitators and assessors is committed to delivering programs that exceed industry standards, equipping individuals and organizations with the essential knowledge and skills for success.
             </p>
         </header>
-
-        <footer>
-            <a href="#portfolio" class="button scrolly">Magna Aliquam</a>
-        </footer>
 
     </div>
 </section>
@@ -28,20 +22,17 @@
     <div class="container">
 
         <header>
-            <h2>Portfolio</h2>
+            <h2>Expertise in Construction Safety, Occupational Health & Safety Training, and More</h2>
         </header>
 
         <p>
-            Vitae natoque dictum etiam semper magnis enim feugiat convallis convallis
-            egestas rhoncus ridiculus in quis risus amet curabitur tempor orci penatibus.
-            Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis
-            fusce hendrerit lacus ridiculus.
+            With extensive experience in various fields, including Construction Safety, Occupational Health & Safety Training, Lifting Equipment, Earth Moving Equipment, and Dangerous Goods, we offer a comprehensive range of training solutions. Our team brings together over 50 years of combined experience in the Fire Services of South Africa, providing us with unique insights and expertise in fire safety.
         </p>
 
         <div class="row">
 
             @* loop over ViewBag.imgGroups *@
-            @foreach ( var imgGroup in ViewBag.imgGroups )
+            @foreach ( dynamic imgGroup in ViewBag.imgGroups )
             {
                 <div class="col-4 col-12-mobile">
                     @foreach ( string img in imgGroup )
@@ -73,27 +64,44 @@
     </div>
 </section>
 
-<!-- About Me -->
-<section id="about" class="three">
+
+<section id="about" class="three dark">
     <div class="container">
 
         <header>
-            <h2>About Me</h2>
+            <h2 class="alt">Building Strong and Trusted Partnerships</h2>
         </header>
 
-        <a href="#" class="image featured">
-            <img src="images/pic08.jpg" alt=""/>
-        </a>
-
         <p>
-            Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus
-            ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae
-            laoreet eget cubilia quam non etiam odio tincidunt montes. Elementum sem
-            parturient nulla quam placerat viverra mauris non cum elit tempus ullamcorper
-            dolor. Libero rutrum ut lacinia donec curae mus vel quisque sociis nec
-            ornare iaculis.
+            At Projected SHE Consultants and Training, we believe in building strong and trusted partnerships with our clients. We take the time to thoroughly understand their needs, training requirements, values, culture, and processes. By actively engaging with our clients, we ensure that our training programs are tailored to their specific goals and objectives.
         </p>
 
+    </div>
+</section>
+
+<!-- Why us -->
+<section id="WhyUs">
+    <div class="container">
+        <header>
+            <header>
+                <h2>Why Choose Us for Your Safety Training Needs?</h2>
+            </header>
+        </header>
+
+        <ul>
+            <li>
+                Unparalleled Experience: With our team's extensive industry experience and diverse expertise, we deliver training that is rooted in practical knowledge and real-world applications.
+            </li>
+            <li>
+                Commitment to Excellence: We are dedicated to surpassing industry standards, constantly updating our training materials and methodologies to provide the highest quality education.
+            </li>
+            <li>
+                Customized Training Solutions: By understanding our clients' unique needs, we develop customized training programs that address their specific challenges and drive performance improvement.
+            </li>
+            <li>
+                Engaging and Interactive Approach: Our training sessions are designed to be engaging, interactive, and hands-on, promoting active learning and knowledge retention.
+            </li>
+        </ul>
     </div>
 </section>
 
@@ -101,10 +109,10 @@
 <section id="contact" class="four">
     <div class="container">
         <header>
-            <h2>Contact</h2>
+            <h2>Contact Us for Industry-Leading Safety Training Solutions</h2>
         </header>
-        <p><i class="bi bi-telephone"></i>+27 76 794 9320</p>
-        <p><i class="bi bi-geo-alt"></i>16 Busschau Rd, Fairleads, Benoni, 1512</p>
+        <p><i class="bi bi-telephone-fill"></i>+27 76 794 9320</p>
+        <p><i class="bi bi-geo-alt-fill"></i>16 Busschau Rd, Fairleads, Benoni, 1512</p>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2919.676579123499!2d28.35421549668803!3d-26.116796811525795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e953fd18b2e37cd%3A0x508d28a5ba9b6407!2sProjected%20SHE%20Consultants%20and%20Training!5e0!3m2!1sen!2sza!4v1684476053303!5m2!1sen!2sza"
                 height="450" style="border:0; width:100%; " allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
@@ -112,16 +120,16 @@
         <form action="mailto:info@psct.co.za" method="post" action="#">
             <div class="row">
                 <div class="col-6 col-12-mobile">
-                    <input type="text" name="name" placeholder="Name"/>
+                    <input type="text" name="name" placeholder="Name" />
                 </div>
                 <div class="col-6 col-12-mobile">
-                    <input type="text" name="email" placeholder="Email"/>
+                    <input type="text" name="email" placeholder="Email" />
                 </div>
                 <div class="col-12">
                     <textarea name="message" placeholder="Message"></textarea>
                 </div>
                 <div class="col-12">
-                    <input type="submit" value="Send Message"/>
+                    <input type="submit" value="Send Message" />
                 </div>
             </div>
         </form>
