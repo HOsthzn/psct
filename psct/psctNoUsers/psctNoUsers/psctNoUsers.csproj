@@ -166,19 +166,10 @@
     <Content Include="Content\resources\IMG_2075.jpg" />
     <Content Include="Content\resources\IMG_6569.jpg" />
     <Content Include="Content\resources\IMG_6571.jpg" />
-    <Content Include="Content\site\fontawesome-all.min.css" />
-    <Content Include="Content\site\images\avatar.jpg" />
-    <Content Include="Content\site\images\banner.jpg" />
-    <Content Include="Content\site\images\ie\grad0-15.svg" />
-    <Content Include="Content\site\images\overlay.png" />
-    <Content Include="Content\site\images\pic02.jpg" />
-    <Content Include="Content\site\images\pic03.jpg" />
-    <Content Include="Content\site\images\pic04.jpg" />
-    <Content Include="Content\site\images\pic05.jpg" />
-    <Content Include="Content\site\images\pic06.jpg" />
-    <Content Include="Content\site\images\pic07.jpg" />
-    <Content Include="Content\site\images\pic08.jpg" />
     <Content Include="Content\site\main.css" />
+    <Content Include="Content\site\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\fa-brands-400.svg" />
     <Content Include="fonts\fa-regular-400.svg" />
@@ -204,6 +195,7 @@
     <Content Include="fonts\fa-solid-900.woff2" />
     <Content Include="Content\logos\Logo.pdf" />
     <Content Include="Files\Projected SHE Profile.pdf" />
+    <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\Debug.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
@@ -223,7 +215,13 @@
     <Content Include="Scripts\site\jquery.scrollex.min.js" />
     <Content Include="Scripts\site\jquery.scrolly.min.js" />
     <Content Include="Scripts\site\main.js" />
+    <Content Include="Scripts\site\main.min.js">
+      <DependentUpon>main.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\site\util.js" />
+    <Content Include="Scripts\site\util.min.js">
+      <DependentUpon>util.js</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

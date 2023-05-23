@@ -12,7 +12,7 @@ namespace psct
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                                                                  "~/Content/bootstrap.min.css"
-                                                               , "~/Content/site/main.css"));
+                                                               , "~/Content/site/main.min.css"));
 
             bundles.Add(new Bundle("~/bundles/js").Include(
                                                            "~/Scripts/modernizr-*"
@@ -23,8 +23,8 @@ namespace psct
                                                          , "~/Scripts/site/jquery.scrollex.min.js"
                                                          , "~/Scripts/site/browser.min.js"
                                                          , "~/Scripts/site/breakpoints.min.js"
-                                                         , "~/Scripts/site/util.js"
-                                                         , "~/Scripts/site/main.js"
+                                                         , "~/Scripts/site/util.min.js"
+                                                         , "~/Scripts/site/main.min.js"
                                                           ));
 
             // Code removed for clarity.
