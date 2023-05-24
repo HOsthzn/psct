@@ -44,9 +44,9 @@ public class HomeController : Controller
         {
             // Configure the SMTP client with your email server settings
             client.Host        = "mail.psct.co.za";
-            client.Port        = 465;
+            client.Port        = 587;
             client.EnableSsl   = true;
-            client.Credentials = new NetworkCredential( "info@psct.co.za", "Wp{KqhecC&A]" );
+            client.Credentials = new NetworkCredential( "info@psct.co.za", "wol,qn4U+TXg" );
 
             // Create the email message
             MailMessage mailMessage = new( );
