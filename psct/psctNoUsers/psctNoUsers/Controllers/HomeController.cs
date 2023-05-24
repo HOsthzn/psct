@@ -40,20 +40,17 @@ public class HomeController : Controller
     [ HttpPost ]
     public ActionResult ContactForm( string name, string email, string message )
     {
-        // TODO: Implement the logic to send the email using the provided data (name, email, message).
-        
-        // Example code to send the email using SmtpClient
         using ( SmtpClient client = new( ) )
         {
             // Configure the SMTP client with your email server settings
             client.Host        = "mail.psct.co.za";
-            client.Port        = 587;
+            client.Port        = 465;
             client.EnableSsl   = true;
-            client.Credentials = new NetworkCredential( "your_email", "your_password" );
+            client.Credentials = new NetworkCredential( "info@psct.co.za", "Wp{KqhecC&A]" );
 
             // Create the email message
             MailMessage mailMessage = new( );
-            mailMessage.From = new MailAddress( "your_email" );
+            mailMessage.From = new MailAddress( "info@psct.co.za" );
             mailMessage.To.Add( "info@psct.co.za" );
             mailMessage.Subject = "Client contact from webSite";
             mailMessage.Body    = $"Name: {name}\nEmail: {email}\nMessage: {message}";
@@ -61,8 +58,7 @@ public class HomeController : Controller
             // Send the email
             client.Send( mailMessage );
         }
-
-        // Redirect to a success page or return a success message
+        
         return RedirectToAction( "Index" );
     }
 }

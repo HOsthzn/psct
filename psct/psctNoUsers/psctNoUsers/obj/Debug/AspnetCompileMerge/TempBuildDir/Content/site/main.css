@@ -1743,7 +1743,6 @@ section, article {
 }
 
 /* Image */
-
 .image {
     display: inline-block;
     border: 0;
@@ -1751,7 +1750,7 @@ section, article {
 
     .image img {
         display: block;
-        width: 70%;
+        width: 100%;
     }
 
     .image.avatar48 {

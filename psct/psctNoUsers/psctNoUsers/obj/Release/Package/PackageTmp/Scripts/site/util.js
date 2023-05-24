@@ -1,587 +1,528 @@
-(function($) {
+( function( $ ) {
+
+    /**
+     * Generate an indented list of links from a nav. Meant for use with panel().
+     * @return {jQuery} jQuery object.
+     */
+    $.fn.navList = function( ) {
+        var $this = $( this );
+        $a = $this.find( 'a' ), b = [ ];
+
+        $a.each( function( ) {
+            var $this = $( this )
+                , indent = Math.max( 0, $this.parents( 'li' ).length - 1 )
+                , href = $this.attr( 'href' )
+                , target = $this.attr( 'target' );
 
-	/**
-	 * Generate an indented list of links from a nav. Meant for use with panel().
-	 * @return {jQuery} jQuery object.
-	 */
-	$.fn.navList = function() {
+            b.push(
+                '<a '
+                + 'class="link depth-'
+                + indent
+                + '"'
+                + ( ( typeof target !== 'undefined' && target != '' ) ? ' target="' + target + '"' : '' )
+                + ( ( typeof href !== 'undefined' && href != '' ) ? ' href="' + href + '"' : '' )
+                + '>'
+                + '<span class="indent-'
+                + indent
+                + '"></span>'
+                + $this.text( )
+                + '</a>'
+            );
+        } );
 
-		var	$this = $(this);
-			$a = $this.find('a'),
-			b = [];
+        return b.join( '' );
+    };
 
-		$a.each(function() {
+    /**
+     * Panel-ify an element.
+     * @param {object} userConfig User config.
+     * @return {jQuery} jQuery object.
+     */
+    $.fn.panel = function( userConfig ) {
 
-			var	$this = $(this),
-				indent = Math.max(0, $this.parents('li').length - 1),
-				href = $this.attr('href'),
-				target = $this.attr('target');
+        // No elements?
+        if ( this.length == 0 ) return $this;
 
-			b.push(
-				'<a ' +
-					'class="link depth-' + indent + '"' +
-					( (typeof target !== 'undefined' && target != '') ? ' target="' + target + '"' : '') +
-					( (typeof href !== 'undefined' && href != '') ? ' href="' + href + '"' : '') +
-				'>' +
-					'<span class="indent-' + indent + '"></span>' +
-					$this.text() +
-				'</a>'
-			);
+        // Multiple elements?
+        if ( this.length > 1 ) {
 
-		});
+            for ( var i = 0; i < this.length; i++ ) $( this[ i ] ).panel( userConfig );
 
-		return b.join('');
+            return $this;
 
-	};
+        }
 
-	/**
-	 * Panel-ify an element.
-	 * @param {object} userConfig User config.
-	 * @return {jQuery} jQuery object.
-	 */
-	$.fn.panel = function(userConfig) {
+        // Vars.
+        var $this = $( this ), $body = $( 'body' ), $window = $( window ), id = $this.attr( 'id' ), config;
 
-		// No elements?
-			if (this.length == 0)
-				return $this;
+        // Config.
+        config = $.extend( {
 
-		// Multiple elements?
-			if (this.length > 1) {
+                // Delay.
+                delay: 0
+                ,
 
-				for (var i=0; i < this.length; i++)
-					$(this[i]).panel(userConfig);
+                // Hide panel on link click.
+                hideOnClick: false
+                ,
 
-				return $this;
+                // Hide panel on escape keypress.
+                hideOnEscape: false
+                ,
 
-			}
+                // Hide panel on swipe.
+                hideOnSwipe: false
+                ,
 
-		// Vars.
-			var	$this = $(this),
-				$body = $('body'),
-				$window = $(window),
-				id = $this.attr('id'),
-				config;
+                // Reset scroll position on hide.
+                resetScroll: false
+                ,
+
+                // Reset forms on hide.
+                resetForms: false
+                ,
+
+                // Side of viewport the panel will appear.
+                side: null
+                ,
+
+                // Target element for "class".
+                target: $this
+                ,
 
-		// Config.
-			config = $.extend({
+                // Class to toggle.
+                visibleClass: 'visible'
+
+            }
+            , userConfig );
+
+        // Expand "target" if it's not a jQuery object already.
+        if ( typeof config.target != 'jQuery' ) config.target = $( config.target );
 
-				// Delay.
-					delay: 0,
+        // Panel.
 
-				// Hide panel on link click.
-					hideOnClick: false,
+        // Methods.
+        $this._hide = function( event ) {
 
-				// Hide panel on escape keypress.
-					hideOnEscape: false,
+            // Already hidden? Bail.
+            if ( !config.target.hasClass( config.visibleClass ) ) return;
 
-				// Hide panel on swipe.
-					hideOnSwipe: false,
+            // If an event was provided, cancel it.
+            if ( event ) {
 
-				// Reset scroll position on hide.
-					resetScroll: false,
+                event.preventDefault( );
+                event.stopPropagation( );
 
-				// Reset forms on hide.
-					resetForms: false,
+            }
 
-				// Side of viewport the panel will appear.
-					side: null,
+            // Hide.
+            config.target.removeClass( config.visibleClass );
 
-				// Target element for "class".
-					target: $this,
+            // Post-hide stuff.
+            window.setTimeout( function( ) {
 
-				// Class to toggle.
-					visibleClass: 'visible'
+                    // Reset scroll position.
+                    if ( config.resetScroll ) $this.scrollTop( 0 );
 
-			}, userConfig);
+                    // Reset forms.
+                    if ( config.resetForms ) $this.find( 'form' ).each( function( ) { this.reset( ); } );
+                }
+                , config.delay );
+        };
 
-			// Expand "target" if it's not a jQuery object already.
-				if (typeof config.target != 'jQuery')
-					config.target = $(config.target);
+        // Vendor fixes.
+        $this
+            .css( '-ms-overflow-style', '-ms-autohiding-scrollbar' )
+            .css( '-webkit-overflow-scrolling', 'touch' );
 
-		// Panel.
+        // Hide on click.
+        if ( config.hideOnClick ) {
 
-			// Methods.
-				$this._hide = function(event) {
+            $this.find( 'a' )
+                .css( '-webkit-tap-highlight-color', 'rgba(0,0,0,0)' );
 
-					// Already hidden? Bail.
-						if (!config.target.hasClass(config.visibleClass))
-							return;
+            $this
+                .on( 'click'
+                    , 'a'
+                    , function( event ) {
+                        var $a = $( this ), href = $a.attr( 'href' ), target = $a.attr( 'target' );
 
-					// If an event was provided, cancel it.
-						if (event) {
+                        if ( !href || href == '#' || href == '' || href == '#' + id ) return;
 
-							event.preventDefault();
-							event.stopPropagation();
+                        // Cancel original event.
+                        event.preventDefault( );
+                        event.stopPropagation( );
 
-						}
+                        // Hide panel.
+                        $this._hide( );
 
-					// Hide.
-						config.target.removeClass(config.visibleClass);
+                        // Redirect to href.
+                        window.setTimeout( function( ) {
+                                if ( target == '_blank' ) window.open( href );
+                                else window.location.href = href;
+                            }
+                            , config.delay + 10 );
+                    } );
 
-					// Post-hide stuff.
-						window.setTimeout(function() {
+        }
 
-							// Reset scroll position.
-								if (config.resetScroll)
-									$this.scrollTop(0);
+        // Event: Touch stuff.
+        $this.on( 'touchstart'
+            , function( event ) {
+                $this.touchPosX = event.originalEvent.touches[ 0 ].pageX;
+                $this.touchPosY = event.originalEvent.touches[ 0 ].pageY;
+            } )
 
-							// Reset forms.
-								if (config.resetForms)
-									$this.find('form').each(function() {
-										this.reset();
-									});
+        $this.on( 'touchmove'
+            , function( event ) {
+                if ( $this.touchPosX === null
+                    || $this.touchPosY === null ) return;
 
-						}, config.delay);
+                var diffX = $this.touchPosX - event.originalEvent.touches[ 0 ].pageX
+                    , diffY = $this.touchPosY - event.originalEvent.touches[ 0 ].pageY
+                    , th = $this.outerHeight( )
+                    , ts = ( $this.get( 0 ).scrollHeight - $this.scrollTop( ) );
 
-				};
+                // Hide on swipe?
+                if ( config.hideOnSwipe ) {
 
-			// Vendor fixes.
-				$this
-					.css('-ms-overflow-style', '-ms-autohiding-scrollbar')
-					.css('-webkit-overflow-scrolling', 'touch');
+                    var result = false, boundary = 20, delta = 50;
 
-			// Hide on click.
-				if (config.hideOnClick) {
+                    switch ( config.side ) {
+                        case 'left':
+                            result = ( diffY < boundary && diffY > ( -1 * boundary ) ) && ( diffX > delta );
+                            break;
 
-					$this.find('a')
-						.css('-webkit-tap-highlight-color', 'rgba(0,0,0,0)');
+                        case 'right':
+                            result = ( diffY < boundary && diffY > ( -1 * boundary ) ) && ( diffX < ( -1 * delta ) );
+                            break;
 
-					$this
-						.on('click', 'a', function(event) {
+                        case 'top':
+                            result = ( diffX < boundary && diffX > ( -1 * boundary ) ) && ( diffY > delta );
+                            break;
 
-							var $a = $(this),
-								href = $a.attr('href'),
-								target = $a.attr('target');
+                        case 'bottom':
+                            result = ( diffX < boundary && diffX > ( -1 * boundary ) ) && ( diffY < ( -1 * delta ) );
+                            break;
 
-							if (!href || href == '#' || href == '' || href == '#' + id)
-								return;
+                        default:
+                            break;
 
-							// Cancel original event.
-								event.preventDefault();
-								event.stopPropagation();
+                    }
 
-							// Hide panel.
-								$this._hide();
+                    if ( result ) {
 
-							// Redirect to href.
-								window.setTimeout(function() {
+                        $this.touchPosX = null;
+                        $this.touchPosY = null;
+                        $this._hide( );
 
-									if (target == '_blank')
-										window.open(href);
-									else
-										window.location.href = href;
+                        return false;
 
-								}, config.delay + 10);
+                    }
 
-						});
+                }
 
-				}
+                // Prevent vertical scrolling past the top or bottom.
+                if ( ( $this.scrollTop( ) < 0 && diffY < 0 )
+                    || ( ts > ( th - 2 ) && ts < ( th + 2 ) && diffY > 0 ) ) {
 
-			// Event: Touch stuff.
-				$this.on('touchstart', function(event) {
+                    event.preventDefault( );
+                    event.stopPropagation( );
 
-					$this.touchPosX = event.originalEvent.touches[0].pageX;
-					$this.touchPosY = event.originalEvent.touches[0].pageY;
+                }
+            } );
 
-				})
+        // Event: Prevent certain events inside the panel from bubbling.
+        $this.on( 'click touchend touchstart touchmove', function( event ) { event.stopPropagation( ); } );
 
-				$this.on('touchmove', function(event) {
+        // Event: Hide panel if a child anchor tag pointing to its ID is clicked.
+        $this.on( 'click'
+            , 'a[href="#' + id + '"]'
+            , function( event ) {
+                event.preventDefault( );
+                event.stopPropagation( );
 
-					if ($this.touchPosX === null
-					||	$this.touchPosY === null)
-						return;
+                config.target.removeClass( config.visibleClass );
+            } );
 
-					var	diffX = $this.touchPosX - event.originalEvent.touches[0].pageX,
-						diffY = $this.touchPosY - event.originalEvent.touches[0].pageY,
-						th = $this.outerHeight(),
-						ts = ($this.get(0).scrollHeight - $this.scrollTop());
+        // Body.
 
-					// Hide on swipe?
-						if (config.hideOnSwipe) {
+        // Event: Hide panel on body click/tap.
+        $body.on( 'click touchend'
+            , function( event ) {
 
-							var result = false,
-								boundary = 20,
-								delta = 50;
+                //if event target is not a img or video
+                if ( event.target.tagName !== 'IMG' && event.target.tagName !== 'VIDEO' ) 
+                    $this._hide( event );
+            } );
 
-							switch (config.side) {
+        // Event: Toggle.
+        $body.on( 'click'
+            , 'a[href="#' + id + '"]'
+            , function( event ) {
+                event.preventDefault( );
+                event.stopPropagation( );
 
-								case 'left':
-									result = (diffY < boundary && diffY > (-1 * boundary)) && (diffX > delta);
-									break;
+                config.target.toggleClass( config.visibleClass );
+            } );
 
-								case 'right':
-									result = (diffY < boundary && diffY > (-1 * boundary)) && (diffX < (-1 * delta));
-									break;
+        // Window.
 
-								case 'top':
-									result = (diffX < boundary && diffX > (-1 * boundary)) && (diffY > delta);
-									break;
+        // Event: Hide on ESC.
+        if ( config.hideOnEscape )
+            $window.on( 'keydown', function( event ) { if ( event.keyCode == 27 ) $this._hide( event ); } );
 
-								case 'bottom':
-									result = (diffX < boundary && diffX > (-1 * boundary)) && (diffY < (-1 * delta));
-									break;
+        return $this;
+    };
 
-								default:
-									break;
+    /**
+     * Apply "placeholder" attribute polyfill to one or more forms.
+     * @return {jQuery} jQuery object.
+     */
+    $.fn.placeholder = function( ) {
 
-							}
+        // Browser natively supports placeholders? Bail.
+        if ( typeof ( document.createElement( 'input' ) ).placeholder != 'undefined' ) return $( this );
 
-							if (result) {
+        // No elements?
+        if ( this.length == 0 ) return $this;
 
-								$this.touchPosX = null;
-								$this.touchPosY = null;
-								$this._hide();
+        // Multiple elements?
+        if ( this.length > 1 ) {
 
-								return false;
+            for ( var i = 0; i < this.length; i++ ) $( this[ i ] ).placeholder( );
 
-							}
+            return $this;
 
-						}
+        }
 
-					// Prevent vertical scrolling past the top or bottom.
-						if (($this.scrollTop() < 0 && diffY < 0)
-						|| (ts > (th - 2) && ts < (th + 2) && diffY > 0)) {
+        // Vars.
+        var $this = $( this );
 
-							event.preventDefault();
-							event.stopPropagation();
+        // Text, TextArea.
+        $this.find( 'input[type=text],textarea' )
+            .each( function( ) {
+                var i = $( this );
 
-						}
+                if ( i.val( ) == ''
+                    || i.val( ) == i.attr( 'placeholder' ) )
+                    i
+                        .addClass( 'polyfill-placeholder' )
+                        .val( i.attr( 'placeholder' ) );
+            } )
+            .on( 'blur'
+                , function( ) {
+                    var i = $( this );
 
-				});
+                    if ( i.attr( 'name' ).match( /-polyfill-field$/ ) ) return;
 
-			// Event: Prevent certain events inside the panel from bubbling.
-				$this.on('click touchend touchstart touchmove', function(event) {
-					event.stopPropagation();
-				});
+                    if ( i.val( ) == '' )
+                        i
+                            .addClass( 'polyfill-placeholder' )
+                            .val( i.attr( 'placeholder' ) );
+                } )
+            .on( 'focus'
+                , function( ) {
+                    var i = $( this );
 
-			// Event: Hide panel if a child anchor tag pointing to its ID is clicked.
-				$this.on('click', 'a[href="#' + id + '"]', function(event) {
+                    if ( i.attr( 'name' ).match( /-polyfill-field$/ ) ) return;
 
-					event.preventDefault();
-					event.stopPropagation();
+                    if ( i.val( ) == i.attr( 'placeholder' ) )
+                        i
+                            .removeClass( 'polyfill-placeholder' )
+                            .val( '' );
+                } );
 
-					config.target.removeClass(config.visibleClass);
+        // Password.
+        $this.find( 'input[type=password]' )
+            .each( function( ) {
+                var i = $( this );
+                var x = $(
+                    $( '<div>' )
+                    .append( i.clone( ) )
+                    .remove( )
+                    .html( )
+                    .replace( /type="password"/i, 'type="text"' )
+                    .replace( /type=password/i, 'type=text' )
+                );
 
-				});
+                if ( i.attr( 'id' ) != '' ) x.attr( 'id', i.attr( 'id' ) + '-polyfill-field' );
 
-		// Body.
+                if ( i.attr( 'name' ) != '' ) x.attr( 'name', i.attr( 'name' ) + '-polyfill-field' );
 
-			// Event: Hide panel on body click/tap.
-				$body.on('click touchend', function(event) {
-					$this._hide(event);
-				});
+                x.addClass( 'polyfill-placeholder' )
+                    .val( x.attr( 'placeholder' ) )
+                    .insertAfter( i );
 
-			// Event: Toggle.
-				$body.on('click', 'a[href="#' + id + '"]', function(event) {
+                if ( i.val( ) == '' ) i.hide( );
+                else x.hide( );
 
-					event.preventDefault();
-					event.stopPropagation();
+                i
+                    .on( 'blur'
+                        , function( event ) {
+                            event.preventDefault( );
 
-					config.target.toggleClass(config.visibleClass);
+                            var x = i.parent( ).find( 'input[name=' + i.attr( 'name' ) + '-polyfill-field]' );
 
-				});
+                            if ( i.val( ) == '' ) {
 
-		// Window.
+                                i.hide( );
+                                x.show( );
 
-			// Event: Hide on ESC.
-				if (config.hideOnEscape)
-					$window.on('keydown', function(event) {
+                            }
+                        } );
 
-						if (event.keyCode == 27)
-							$this._hide(event);
+                x
+                    .on( 'focus'
+                        , function( event ) {
+                            event.preventDefault( );
 
-					});
+                            var i = x.parent( )
+                                .find( 'input[name=' + x.attr( 'name' ).replace( '-polyfill-field', '' ) + ']' );
 
-		return $this;
+                            x.hide( );
 
-	};
+                            i
+                                .show( )
+                                .focus( );
+                        } )
+                    .on( 'keypress'
+                        , function( event ) {
+                            event.preventDefault( );
+                            x.val( '' );
+                        } );
+            } );
 
-	/**
-	 * Apply "placeholder" attribute polyfill to one or more forms.
-	 * @return {jQuery} jQuery object.
-	 */
-	$.fn.placeholder = function() {
+        // Events.
+        $this
+            .on( 'submit'
+                , function( ) {
+                    $this.find( 'input[type=text],input[type=password],textarea' )
+                        .each( function( event ) {
+                            var i = $( this );
 
-		// Browser natively supports placeholders? Bail.
-			if (typeof (document.createElement('input')).placeholder != 'undefined')
-				return $(this);
+                            if ( i.attr( 'name' ).match( /-polyfill-field$/ ) ) i.attr( 'name', '' );
 
-		// No elements?
-			if (this.length == 0)
-				return $this;
+                            if ( i.val( ) == i.attr( 'placeholder' ) ) {
 
-		// Multiple elements?
-			if (this.length > 1) {
+                                i.removeClass( 'polyfill-placeholder' );
+                                i.val( '' );
 
-				for (var i=0; i < this.length; i++)
-					$(this[i]).placeholder();
+                            }
+                        } );
+                } )
+            .on( 'reset'
+                , function( event ) {
+                    event.preventDefault( );
 
-				return $this;
+                    $this.find( 'select' )
+                        .val( $( 'option:first' ).val( ) );
 
-			}
+                    $this.find( 'input,textarea' )
+                        .each( function( ) {
+                            var i = $( this ), x;
 
-		// Vars.
-			var $this = $(this);
+                            i.removeClass( 'polyfill-placeholder' );
 
-		// Text, TextArea.
-			$this.find('input[type=text],textarea')
-				.each(function() {
+                            switch ( this.type ) {
+                                case 'submit':
+                                case 'reset':
+                                    break;
 
-					var i = $(this);
+                                case 'password':
+                                    i.val( i.attr( 'defaultValue' ) );
 
-					if (i.val() == ''
-					||  i.val() == i.attr('placeholder'))
-						i
-							.addClass('polyfill-placeholder')
-							.val(i.attr('placeholder'));
+                                    x = i.parent( ).find( 'input[name=' + i.attr( 'name' ) + '-polyfill-field]' );
 
-				})
-				.on('blur', function() {
+                                    if ( i.val( ) == '' ) {
+                                        i.hide( );
+                                        x.show( );
+                                    } else {
+                                        i.show( );
+                                        x.hide( );
+                                    }
 
-					var i = $(this);
+                                    break;
 
-					if (i.attr('name').match(/-polyfill-field$/))
-						return;
+                                case 'checkbox':
+                                case 'radio':
+                                    i.attr( 'checked', i.attr( 'defaultValue' ) );
+                                    break;
 
-					if (i.val() == '')
-						i
-							.addClass('polyfill-placeholder')
-							.val(i.attr('placeholder'));
+                                case 'text':
+                                case 'textarea':
+                                    i.val( i.attr( 'defaultValue' ) );
 
-				})
-				.on('focus', function() {
+                                    if ( i.val( ) == '' ) {
+                                        i.addClass( 'polyfill-placeholder' );
+                                        i.val( i.attr( 'placeholder' ) );
+                                    }
 
-					var i = $(this);
+                                    break;
 
-					if (i.attr('name').match(/-polyfill-field$/))
-						return;
+                                default:
+                                    i.val( i.attr( 'defaultValue' ) );
+                                    break;
 
-					if (i.val() == i.attr('placeholder'))
-						i
-							.removeClass('polyfill-placeholder')
-							.val('');
+                            }
+                        } );
+                } );
 
-				});
+        return $this;
+    };
 
-		// Password.
-			$this.find('input[type=password]')
-				.each(function() {
+    /**
+     * Moves elements to/from the first positions of their respective parents.
+     * @param {jQuery} $elements Elements (or selector) to move.
+     * @param {bool} condition If true, moves elements to the top. Otherwise, moves elements back to their original locations.
+     */
+    $.prioritize = function( $elements, condition ) {
+        var key = '__prioritize';
 
-					var i = $(this);
-					var x = $(
-								$('<div>')
-									.append(i.clone())
-									.remove()
-									.html()
-									.replace(/type="password"/i, 'type="text"')
-									.replace(/type=password/i, 'type=text')
-					);
+        // Expand $elements if it's not already a jQuery object.
+        if ( typeof $elements != 'jQuery' ) $elements = $( $elements );
 
-					if (i.attr('id') != '')
-						x.attr('id', i.attr('id') + '-polyfill-field');
+        // Step through elements.
+        $elements.each( function( ) {
+            var $e = $( this ), $p, $parent = $e.parent( );
 
-					if (i.attr('name') != '')
-						x.attr('name', i.attr('name') + '-polyfill-field');
+            // No parent? Bail.
+            if ( $parent.length == 0 ) return;
 
-					x.addClass('polyfill-placeholder')
-						.val(x.attr('placeholder')).insertAfter(i);
+            // Not moved? Move it.
+            if ( !$e.data( key ) ) {
 
-					if (i.val() == '')
-						i.hide();
-					else
-						x.hide();
+                // Condition is false? Bail.
+                if ( !condition ) return;
 
-					i
-						.on('blur', function(event) {
+                // Get placeholder (which will serve as our point of reference for when this element needs to move back).
+                $p = $e.prev( );
 
-							event.preventDefault();
+                // Couldn't find anything? Means this element's already at the top, so bail.
+                if ( $p.length == 0 ) return;
 
-							var x = i.parent().find('input[name=' + i.attr('name') + '-polyfill-field]');
+                // Move element to top of parent.
+                $e.prependTo( $parent );
 
-							if (i.val() == '') {
+                // Mark element as moved.
+                $e.data( key, $p );
 
-								i.hide();
-								x.show();
+            }
+            // Moved already?
+            else {
 
-							}
+                // Condition is true? Bail.
+                if ( condition ) return;
 
-						});
+                $p = $e.data( key );
 
-					x
-						.on('focus', function(event) {
+                // Move element back to its original location (using our placeholder).
+                $e.insertAfter( $p );
 
-							event.preventDefault();
+                // Unmark element as moved.
+                $e.removeData( key );
 
-							var i = x.parent().find('input[name=' + x.attr('name').replace('-polyfill-field', '') + ']');
-
-							x.hide();
-
-							i
-								.show()
-								.focus();
-
-						})
-						.on('keypress', function(event) {
-
-							event.preventDefault();
-							x.val('');
-
-						});
-
-				});
-
-		// Events.
-			$this
-				.on('submit', function() {
-
-					$this.find('input[type=text],input[type=password],textarea')
-						.each(function(event) {
-
-							var i = $(this);
-
-							if (i.attr('name').match(/-polyfill-field$/))
-								i.attr('name', '');
-
-							if (i.val() == i.attr('placeholder')) {
-
-								i.removeClass('polyfill-placeholder');
-								i.val('');
-
-							}
-
-						});
-
-				})
-				.on('reset', function(event) {
-
-					event.preventDefault();
-
-					$this.find('select')
-						.val($('option:first').val());
-
-					$this.find('input,textarea')
-						.each(function() {
-
-							var i = $(this),
-								x;
-
-							i.removeClass('polyfill-placeholder');
-
-							switch (this.type) {
-
-								case 'submit':
-								case 'reset':
-									break;
-
-								case 'password':
-									i.val(i.attr('defaultValue'));
-
-									x = i.parent().find('input[name=' + i.attr('name') + '-polyfill-field]');
-
-									if (i.val() == '') {
-										i.hide();
-										x.show();
-									}
-									else {
-										i.show();
-										x.hide();
-									}
-
-									break;
-
-								case 'checkbox':
-								case 'radio':
-									i.attr('checked', i.attr('defaultValue'));
-									break;
-
-								case 'text':
-								case 'textarea':
-									i.val(i.attr('defaultValue'));
-
-									if (i.val() == '') {
-										i.addClass('polyfill-placeholder');
-										i.val(i.attr('placeholder'));
-									}
-
-									break;
-
-								default:
-									i.val(i.attr('defaultValue'));
-									break;
-
-							}
-						});
-
-				});
-
-		return $this;
-
-	};
-
-	/**
-	 * Moves elements to/from the first positions of their respective parents.
-	 * @param {jQuery} $elements Elements (or selector) to move.
-	 * @param {bool} condition If true, moves elements to the top. Otherwise, moves elements back to their original locations.
-	 */
-	$.prioritize = function($elements, condition) {
-
-		var key = '__prioritize';
-
-		// Expand $elements if it's not already a jQuery object.
-			if (typeof $elements != 'jQuery')
-				$elements = $($elements);
-
-		// Step through elements.
-			$elements.each(function() {
-
-				var	$e = $(this), $p,
-					$parent = $e.parent();
-
-				// No parent? Bail.
-					if ($parent.length == 0)
-						return;
-
-				// Not moved? Move it.
-					if (!$e.data(key)) {
-
-						// Condition is false? Bail.
-							if (!condition)
-								return;
-
-						// Get placeholder (which will serve as our point of reference for when this element needs to move back).
-							$p = $e.prev();
-
-							// Couldn't find anything? Means this element's already at the top, so bail.
-								if ($p.length == 0)
-									return;
-
-						// Move element to top of parent.
-							$e.prependTo($parent);
-
-						// Mark element as moved.
-							$e.data(key, $p);
-
-					}
-
-				// Moved already?
-					else {
-
-						// Condition is true? Bail.
-							if (condition)
-								return;
-
-						$p = $e.data(key);
-
-						// Move element back to its original location (using our placeholder).
-							$e.insertAfter($p);
-
-						// Unmark element as moved.
-							$e.removeData(key);
-
-					}
-
-			});
-
-	};
-
-})(jQuery);
+            }
+        } );
+    };
+} )( jQuery );

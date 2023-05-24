@@ -40,20 +40,20 @@
                         if ( img.EndsWith( ".mp4" ) || img.EndsWith( ".MP4" ) )
                         {
                             <article class="item">
-                                <a href="#" class="image fit">
-                                    <video width="320" height="240" controls>
+                                <span class="image fit">
+                                    <video width="320" height="240" controls  controlsList="nodownload">
                                         <source src="~/Content/resources/@img" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
-                                </a>
+                                </span>
                             </article>
                         }
                         else
                         {
                             <article class="item">
-                                <a href="#" class="image fit">
+                                <span class="image fit">
                                     <img src="~/Content/resources/@img" alt="Img not Found"/>
-                                </a>
+                                </span>
                             </article>
                         }
                     }

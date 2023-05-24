@@ -23,8 +23,8 @@ namespace psct
                                                          , "~/Scripts/site/jquery.scrollex.min.js"
                                                          , "~/Scripts/site/browser.min.js"
                                                          , "~/Scripts/site/breakpoints.min.js"
-                                                         , "~/Scripts/site/util.min.js"
-                                                         , "~/Scripts/site/main.min.js"
+                                                         /*, "~/Scripts/site/util.js"
+                                                         , "~/Scripts/site/main.js"*/
                                                           ));
 
             // Code removed for clarity.

@@ -16,10 +16,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>05/23/2023 14:09:53</publishTime>
+      <publishTime>05/24/2023 07:24:29</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>05/23/2023 14:09:53</publishTime>
+      <publishTime>05/24/2023 07:24:29</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>03/06/2023 00:41:40</publishTime>
@@ -31,10 +31,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/08/2023 09:09:56</publishTime>
     </File>
     <File Include="bin/psctNoUsers.dll">
-      <publishTime>05/23/2023 14:09:47</publishTime>
+      <publishTime>05/24/2023 07:24:22</publishTime>
     </File>
     <File Include="bin/psctNoUsers.pdb">
-      <publishTime>05/23/2023 14:09:47</publishTime>
+      <publishTime>05/24/2023 07:24:22</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>02/15/2022 07:38:32</publishTime>
@@ -273,6 +273,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/logos/Logo_Page_2.jpg">
       <publishTime>05/19/2023 06:34:28</publishTime>
     </File>
+    <File Include="Content/logos/MainLogo.png">
+      <publishTime>05/23/2023 06:44:53</publishTime>
+    </File>
     <File Include="Content/logos/New logo 2.png">
       <publishTime>05/23/2023 06:44:53</publishTime>
     </File>
@@ -352,16 +355,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/15/2023 06:50:38</publishTime>
     </File>
     <File Include="Content/site/main.css">
-      <publishTime>05/23/2023 12:35:27</publishTime>
+      <publishTime>05/23/2023 14:19:00</publishTime>
     </File>
     <File Include="Content/site/main.min.css">
-      <publishTime>05/23/2023 12:35:27</publishTime>
+      <publishTime>05/23/2023 14:19:00</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>05/23/2023 12:27:43</publishTime>
     </File>
     <File Include="Files/Projected SHE Profile.pdf">
-      <publishTime>05/23/2023 14:04:46</publishTime>
+      <publishTime>05/24/2023 07:23:43</publishTime>
     </File>
     <File Include="fonts/fa-brands-400.eot">
       <publishTime>05/15/2023 06:50:37</publishTime>
@@ -409,7 +412,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/15/2023 06:50:37</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>05/23/2023 14:09:48</publishTime>
+      <publishTime>05/24/2023 07:24:23</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>05/15/2023 06:49:29</publishTime>
@@ -502,10 +505,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/23/2023 10:34:44</publishTime>
     </File>
     <File Include="Scripts/site/util.js">
-      <publishTime>05/15/2023 06:50:37</publishTime>
+      <publishTime>05/24/2023 07:15:02</publishTime>
     </File>
     <File Include="Scripts/site/util.min.js">
-      <publishTime>05/23/2023 10:34:50</publishTime>
+      <publishTime>05/24/2023 07:15:03</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>05/15/2023 06:49:22</publishTime>
@@ -514,13 +517,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/15/2023 06:49:22</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/23/2023 13:00:27</publishTime>
+      <publishTime>05/24/2023 07:19:31</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>05/15/2023 06:49:22</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/23/2023 12:47:58</publishTime>
+      <publishTime>05/24/2023 07:06:37</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>05/15/2023 07:13:19</publishTime>
