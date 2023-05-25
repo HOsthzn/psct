@@ -24,7 +24,7 @@
         <header>
             <h2>Expertise in Construction Safety, Occupational Health & Safety Training, and More</h2>
         </header>
-
+        
         <p>
             With extensive experience in various fields, including Construction Safety, Occupational Health & Safety Training, Lifting Equipment, Earth Moving Equipment, and Dangerous Goods, we offer a comprehensive range of training solutions. Our team brings together over 50 years of combined experience in the Fire Services of South Africa, providing us with unique insights and expertise in fire safety.
         </p>
@@ -32,16 +32,16 @@
         <div class="row">
 
             @* loop over ViewBag.imgGroups *@
-            @foreach ( dynamic imgGroup in ViewBag.imgGroups )
+            @foreach (dynamic imgGroup in ViewBag.imgGroups)
             {
                 <div class="col-4 col-12-mobile">
-                    @foreach ( string img in imgGroup )
+                    @foreach (string img in imgGroup)
                     {
-                        if ( img.EndsWith( ".mp4" ) || img.EndsWith( ".MP4" ) )
+                        if (img.EndsWith(".mp4") || img.EndsWith(".MP4"))
                         {
                             <article class="item">
                                 <span class="image fit">
-                                    <video width="320" height="240" controls  controlsList="nodownload">
+                                    <video width="320" height="240" controls controlsList="nodownload">
                                         <source src="~/Content/resources/@img" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
@@ -52,7 +52,7 @@
                         {
                             <article class="item">
                                 <span class="image fit">
-                                    <img src="~/Content/resources/@img" alt="Img not Found"/>
+                                    <img src="~/Content/resources/@img" alt="Img not Found" />
                                 </span>
                             </article>
                         }
@@ -70,8 +70,9 @@
 
         <header>
             <h2 class="alt">Building Strong and Trusted Partnerships</h2>
+            
         </header>
-
+        
         <p>
             At Projected SHE Consultants and Training, we believe in building strong and trusted partnerships with our clients. We take the time to thoroughly understand their needs, training requirements, values, culture, and processes. By actively engaging with our clients, we ensure that our training programs are tailored to their specific goals and objectives.
         </p>
@@ -87,7 +88,7 @@
                 <h2>Why Choose Us for Your Safety Training Needs?</h2>
             </header>
         </header>
-
+        
         <ul>
             <li>
                 Unparalleled Experience: With our team's extensive industry experience and diverse expertise, we deliver training that is rooted in practical knowledge and real-world applications.
@@ -110,10 +111,16 @@
     <div class="container">
         <header>
             <h2>Contact Us for Industry-Leading Safety Training Solutions</h2>
+            @*<i class="bi bi-clock-fill d-flex"></i>*@
         </header>
         <p><i class="bi bi-telephone-fill"></i>+27 76 794 9320</p>
         <p><i class="bi bi-geo-alt-fill"></i>16 Busschau Rd, Fairleads, Benoni, 1512</p>
-        <p></p>
+        @*<div>
+            <p><i class="bi bi-clock-fill"></i>Business hours</p>
+            <ul>Monday: 8am – 4pm</ul>
+            <ul>Tuesday to Friday: 7am – 4pm</ul>
+            <ul>Saturday & Sunday: Closed</ul>
+        </div>*@
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2919.676579123499!2d28.35421549668803!3d-26.116796811525795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e953fd18b2e37cd%3A0x508d28a5ba9b6407!2sProjected%20SHE%20Consultants%20and%20Training!5e0!3m2!1sen!2sza!4v1684476053303!5m2!1sen!2sza"
                 height="450" style="border:0; width:100%; " allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>

@@ -166,6 +166,16 @@
     <Content Include="Content\resources\IMG_2075.jpg" />
     <Content Include="Content\resources\IMG_6569.jpg" />
     <Content Include="Content\resources\IMG_6571.jpg" />
+    <Content Include="Content\site\images\avatar.jpg" />
+    <Content Include="Content\site\images\banner.jpg" />
+    <Content Include="Content\site\images\overlay.png" />
+    <Content Include="Content\site\images\pic02.jpg" />
+    <Content Include="Content\site\images\pic03.jpg" />
+    <Content Include="Content\site\images\pic04.jpg" />
+    <Content Include="Content\site\images\pic05.jpg" />
+    <Content Include="Content\site\images\pic06.jpg" />
+    <Content Include="Content\site\images\pic07.jpg" />
+    <Content Include="Content\site\images\pic08.jpg" />
     <Content Include="Content\site\main.css" />
     <Content Include="Content\site\main.min.css">
       <DependentUpon>main.css</DependentUpon>

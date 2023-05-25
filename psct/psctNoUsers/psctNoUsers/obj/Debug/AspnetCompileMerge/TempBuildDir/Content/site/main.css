@@ -2249,7 +2249,7 @@ button,
 
         #main > section.one {
             background-color: #16A4C8;
-            background-image: url("../../images/banner.jpg");
+            background-image: url('images/banner.jpg');
         }
 
         #main > section.two {
