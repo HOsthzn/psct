@@ -1767,6 +1767,11 @@ section, article {
     .image.fit {
         display: block;
         width: 100%;
+        transition: 2s;
+    }
+
+    .image.fit.large{        
+        transform: scale(1.2)
     }
 
     .image.featured {

@@ -4,120 +4,115 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-(function($) {
+( function( $ ) {
+    var $window = $( window ), $body = $( "body" ), $nav = $( "#nav" );
 
-	var	$window = $(window),
-		$body = $('body'),
-		$nav = $('#nav');
+    // Breakpoints.
+    breakpoints( {
+        wide: [ "961px", "1880px" ]
+        , normal: [ "961px", "1620px" ]
+        , narrow: [ "961px", "1320px" ]
+        , narrower: [ "737px", "960px" ]
+        , mobile: [ null, "736px" ]
+    } );
 
-	// Breakpoints.
-		breakpoints({
-			wide:      [ '961px',  '1880px' ],
-			normal:    [ '961px',  '1620px' ],
-			narrow:    [ '961px',  '1320px' ],
-			narrower:  [ '737px',  '960px'  ],
-			mobile:    [ null,     '736px'  ]
-		});
+    // Play initial animations on page load.
+    $window.on( "load", function( ) { window.setTimeout( function( ) { $body.removeClass( "is-preload" ); }, 100 ); } );
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+    // Nav.
+    var $nav_a = $nav.find( "a" );
 
-	// Nav.
-		var $nav_a = $nav.find('a');
+    $nav_a
+        .addClass( "scrolly" )
+        .on( "click"
+            , function( e ) {
+                var $this = $( this );
 
-		$nav_a
-			.addClass('scrolly')
-			.on('click', function(e) {
+                // External link? Bail.
+                if ( $this.attr( "href" ).charAt( 0 ) != "#" ) return;
 
-				var $this = $(this);
+                // Prevent default.
+                e.preventDefault( );
 
-				// External link? Bail.
-					if ($this.attr('href').charAt(0) != '#')
-						return;
+                // Deactivate all links.
+                $nav_a.removeClass( "active" );
 
-				// Prevent default.
-					e.preventDefault();
+                // Activate link *and* lock it (so Scrollex doesn't try to activate other links as we're scrolling to this one's section).
+                $this
+                    .addClass( "active" )
+                    .addClass( "active-locked" );
+            } )
+        .each( function( ) {
+            var $this = $( this ), id = $this.attr( "href" ), $section = $( id );
 
-				// Deactivate all links.
-					$nav_a.removeClass('active');
+            // No section for this link? Bail.
+            if ( $section.length < 1 ) return;
 
-				// Activate link *and* lock it (so Scrollex doesn't try to activate other links as we're scrolling to this one's section).
-					$this
-						.addClass('active')
-						.addClass('active-locked');
+            // Scrollex.
+            $section.scrollex( {
+                mode: "middle"
+                , top: "-10vh"
+                , bottom: "-10vh"
+                , initialize: function( ) {
 
-			})
-			.each(function() {
+                    // Deactivate section.
+                    $section.addClass( "inactive" );
+                }
+                , enter: function( ) {
 
-				var	$this = $(this),
-					id = $this.attr('href'),
-					$section = $(id);
+                    // Activate section.
+                    $section.removeClass( "inactive" );
 
-				// No section for this link? Bail.
-					if ($section.length < 1)
-						return;
+                    // No locked links? Deactivate all links and activate this section's one.
+                    if ( $nav_a.filter( ".active-locked" ).length == 0 ) {
 
-				// Scrollex.
-					$section.scrollex({
-						mode: 'middle',
-						top: '-10vh',
-						bottom: '-10vh',
-						initialize: function() {
+                        $nav_a.removeClass( "active" );
+                        $this.addClass( "active" );
 
-							// Deactivate section.
-								$section.addClass('inactive');
+                    }
+                    // Otherwise, if this section's link is the one that's locked, unlock it.
+                    else if ( $this.hasClass( "active-locked" ) ) $this.removeClass( "active-locked" );
+                }
+            } );
+        } );
 
-						},
-						enter: function() {
+    // Scrolly.
+    $( ".scrolly" ).scrolly( );
 
-							// Activate section.
-								$section.removeClass('inactive');
+    // Header (narrower + mobile).
 
-							// No locked links? Deactivate all links and activate this section's one.
-								if ($nav_a.filter('.active-locked').length == 0) {
+    // Toggle.
+    $(
+            '<div id="headerToggle">' + '<a href="#header" class="toggle"></a>' + "</div>"
+        )
+        .appendTo( $body );
 
-									$nav_a.removeClass('active');
-									$this.addClass('active');
+    // Header.
+    $( "#header" )
+        .panel( {
+            delay: 500
+            , hideOnClick: true
+            , hideOnSwipe: true
+            , resetScroll: true
+            , resetForms: true
+            , side: "left"
+            , target: $body
+            , visibleClass: "header-visible"
+        } );
 
-								}
+    $( ".image.fit" )
+        .on( "click"
+            , function( e ) {
+                if ( !( /Mobi|Android/i.test( navigator.userAgent ) ) ) {
+                    $( ".image.fit" ).each( function( ) { $( this ).removeClass( "large" ); } );
 
-							// Otherwise, if this section's link is the one that's locked, unlock it.
-								else if ($this.hasClass('active-locked'))
-									$this.removeClass('active-locked');
 
-						}
-					});
+                    var videos = document.getElementsByTagName( "video" );
+                    for ( var i = 0; i < videos.length; i++ ) {
+                        videos[ i ].pause( );
+                    }
 
-			});
-
-	// Scrolly.
-		$('.scrolly').scrolly();
-
-	// Header (narrower + mobile).
-
-		// Toggle.
-			$(
-				'<div id="headerToggle">' +
-					'<a href="#header" class="toggle"></a>' +
-				'</div>'
-			)
-				.appendTo($body);
-
-		// Header.
-			$('#header')
-				.panel({
-					delay: 500,
-					hideOnClick: true,
-					hideOnSwipe: true,
-					resetScroll: true,
-					resetForms: true,
-					side: 'left',
-					target: $body,
-					visibleClass: 'header-visible'
-				});
-
-})(jQuery);
+                    $( this ).addClass( "large" );
+                }
+            } );
+} )( jQuery );

@@ -156,16 +156,6 @@
     <Content Include="Content\logos\New Logo.tif" />
     <Content Include="Content\logos\Picture2.jpg" />
     <Content Include="Content\logos\PSCT Logo.jpg" />
-    <Content Include="Content\resources\1fee4c2d-dfba-4df5-a87c-17854ff8e0d3.MP4" />
-    <Content Include="Content\resources\35b12120-64a0-461e-a125-b5102de904f2.MP4" />
-    <Content Include="Content\resources\8a5329bf-ee21-49ab-bd76-a8770549c7f2.JPG" />
-    <Content Include="Content\resources\ec1f522c-b899-47a2-b8dc-4e94d4c238ef.MP4" />
-    <Content Include="Content\resources\fd295b7b-ef98-48bb-ac93-96cad309e2f6.MP4" />
-    <Content Include="Content\resources\IMG_0048.jpg" />
-    <Content Include="Content\resources\IMG_1283.jpg" />
-    <Content Include="Content\resources\IMG_2075.jpg" />
-    <Content Include="Content\resources\IMG_6569.jpg" />
-    <Content Include="Content\resources\IMG_6571.jpg" />
     <Content Include="Content\site\images\avatar.jpg" />
     <Content Include="Content\site\images\banner.jpg" />
     <Content Include="Content\site\images\overlay.png" />
@@ -247,6 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
